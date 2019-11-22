@@ -52,23 +52,127 @@ app.get('/fenlei', (req, res) => {
 app.get('/bangdan', (req, res) => {
 
   setTimeout(() => {
-    res.send([{
-        id: 1,
-        name: 'product2.1'
-      },
+    res.send(
       {
-        id: 2,
-        name: 'product2.2'
-      },
+      "isAllPaid": false,
+      "coverPath": "http://fdfs.xmcdn.com/group37/M0A/A9/C0/wKgJoFpCOvjxj8zjAABWkqxY2as682.jpg",
+      "title": "喜马拉雅最热合集",
+      "subtitle": "80%的用户都在听的好内容",
+      "key": "1_163_ranking:album:playedEndUsers:30:0",
+      "firstId": 7,
+      "firstTitle": "鲜快报",
+      "calcPeriod": "月榜",
+      "top": 100,
+      "firstKResults": [
+          {
+              "id": 7,
+              "title": "鲜快报",
+              "contentType": "album"
+          },
+          {
+              "id": 8,
+              "title": "郭德纲21年相声精选",
+              "contentType": "album"
+          },
+          {
+              "id":9,
+              "title": "读者",
+              "contentType": "album"
+          }
+      ]
+  },
+  {
+    "coverPath": "http://fdfs.xmcdn.com/group37/M0A/A9/C0/wKgJoFpCOvjxj8zjAABWkqxY2as682.jpg",
+    "title": "喜马拉雅最热合集",
+    "subtitle": "80%的用户都在听的好内容",
+    "key": "1_163_ranking:album:playedEndUsers:30:0",
+    "firstId": 8,
+    "firstTitle": "摸金天师【紫襟演播】",
+    "calcPeriod": "月榜",
+    "top": 100,
+    "firstKResults": [
       {
-        id: 3,
-        name: 'product2.3'
-      }
-    ])
+        "id": 4756811,
+        "title": "摸金天师【紫襟演播】",
+        "contentType": "album"
+    },
+    {
+      "id": 12642314,
+      "title": "猎罪者（阴间神探 | 紫襟演播）",
+      "contentType": "album"
+  },
+    {
+    "id": 19383749,
+    "title": "王的女人谁敢动｜爆笑古言穿越（免费双播精品）",
+    "contentType": "album"
+   }
+    ]
+},
+{
+  "coverPath": "http://fdfs.xmcdn.com/group7/M05/6E/5F/wKgDWlc6_cDSLN8TAABrpbm1xw8820.jpg",
+  "title": "科技播客精选榜",
+  "subtitle": "有趣有料的科技播客，听就够了！",
+  "key": "1_163_ranking:album:playedEndUsers:30:0",
+  "firstId": 10,
+  "firstTitle": "原来是这样？！",
+  "calcPeriod": "日榜",
+  "top": 100,
+  "firstKResults": [
+    {
+      "id": 10,
+      "title": "原来是这样？！",
+      "contentType": "album"
+   },
+    {
+        "id": 10,
+        "title": "大老李聊数学（全集）",
+        "contentType": "album"
+    },
+    {
+        "id": 11,
+        "title": "回到2049",
+        "contentType": "album"
+    }
+  ]
+},
+{
+          "coverPath": "http://fdfs.xmcdn.com/group7/M05/6E/5F/wKgDWlc6_cqS-503AACRSvnvtvo900.jpg",
+          "title": "涨知识历史榜",
+          "subtitle": "涨点历史知识很重要！不听会吃亏！",
+          "key":"1_61_ranking:album:subscribed:1:9",
+          "firstId": 12,
+          "firstTitle": "易中天品三国",
+          "calcPeriod": "日榜",
+          "top": 100,
+          "firstKResults": [
+            {
+              "id": 12,
+              "title": "易中天品三国",
+              "contentType": "album"
+          },
+          {
+              "id": 13,
+              "title": "中国历史未解之谜（持续更新中）",
+              "contentType": "album"
+          },
+          {
+              "id": 14,
+              "title": "听谢涛·真三国 (请留意简介说明)",
+              "contentType": "album"
+          }
+          ]
+      },)
   }, 1000 + Math.random() * 2000);
 
 })
+app.get('/tuijian',(req,res) =>{
+setTimeout(() => {
+  res.send(
 
-app.listen(4000, () => {
-  console.log('server app start on port 4000')
+  )
+}, 1000 + Math.random() * 2000);
+})
+
+app.listen(3000, () => {
+  console.log('服务器启动0')
 })
