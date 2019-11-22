@@ -1,19 +1,22 @@
 <template>
   <div id="audioBook">
-    <img src="../../common/images/audioBook/1.jpg" alt="">
+    <div v-for="(item, index) in audioBook.imgData" :key="index">
+      <img :src="audioBook.imgData[0]" alt="">
+    </div>
   </div>
 </template>
 
 <script>
   
   export default {
+    props:['audioBook'],
     data(){
       return {
         
       }
     },
     mounted(){
-      
+      console.log(this.audioBook)
     },
     methods:{
       

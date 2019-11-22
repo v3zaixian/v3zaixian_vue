@@ -131,7 +131,7 @@
             width 70px
             margin 0 auto
             bottom-border-1px(rgba(7,17,27,0.1))
-            color: #72727b
+            color: #f86442
     .rightContainer
       width 295px
       .title

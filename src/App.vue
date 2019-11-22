@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="appContainer">
     <HeaderGuide v-if="$route.meta.isShowHeaderGuide"/>
     <router-view></router-view>
     <FooterGuide v-if="$route.meta.isShowFooterGuide"/>
@@ -16,5 +16,7 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-
+  #appContainer
+    height 100vh
+    overflow hidden
 </style>

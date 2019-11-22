@@ -2,14 +2,8 @@
   <div id="Music">
     <div class="swiper-container">
       <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <img src="../../common/images/audioBook/4.jpg" alt="">
-        </div>
-        <div class="swiper-slide">
-          <img src="../../common/images/audioBook/2.jpg" alt="">
-        </div>
-        <div class="swiper-slide">
-          <img src="../../common/images/audioBook/3.jpg" alt="">
+        <div class="swiper-slide" v-for="(iamge, index) in music.imgData" :key="index">
+          <img :src="iamge" alt="">
         </div>
       </div>
     </div>
@@ -20,6 +14,7 @@
   import Swiper from 'swiper'
   import 'swiper/css/swiper.min.css'
   export default {
+    props:['music'],
     data(){
       return {
         

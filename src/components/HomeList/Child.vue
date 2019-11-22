@@ -1,20 +1,10 @@
 <template>
-  <div id="Child">
+  <div id="homeChild">
     <div class="swiper-child">
       <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <img src="../../common/images/audioBook/7.jpg" alt="">
+        <div class="swiper-slide" v-for="(image, index) in child.imgData" :key="index">
+          <img :src="image" alt="">
         </div>
-        <div class="swiper-slide">
-          <img src="../../common/images/audioBook/8.jpg" alt="">
-        </div>
-        <div class="swiper-slide">
-          <img src="../../common/images/audioBook/6.jpg" alt="">
-        </div>
-        <div class="swiper-slide">
-          <img src="../../common/images/audioBook/5.jpg" alt="">
-        </div>
-        
       </div>
     </div>
     
@@ -25,6 +15,7 @@
   import Swiper from 'swiper'
   import 'swiper/css/swiper.min.css'
   export default {
+    props:['child'],
     data(){
       return {
         
@@ -54,8 +45,8 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-  #Child
-    width 100%
+  #homeChild
+    width 375px
     height 100px
     .swiper-child
         width 100%

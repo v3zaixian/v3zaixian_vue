@@ -2,14 +2,8 @@
   <div id="CrossTalk">
     <div class="swiper-talk">
       <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <img src="../../common/images/audioBook/5.jpg" alt="">
-        </div>
-        <div class="swiper-slide">
-          <img src="../../common/images/audioBook/7.jpg" alt="">
-        </div>
-        <div class="swiper-slide">
-          <img src="../../common/images/audioBook/8.jpg" alt="">
+        <div class="swiper-slide" v-for="(image, index) in crossTalk.imgData" :key="index">
+          <img :src="image" alt="">
         </div>
       </div>
     </div>
@@ -34,7 +28,7 @@
   import Swiper from 'swiper'
   import 'swiper/css/swiper.min.css'
   export default {
-    
+    props:['crossTalk'],
     data(){
       return {
         

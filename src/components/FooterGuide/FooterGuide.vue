@@ -2,7 +2,7 @@
   <div id="footerGuideContainer">
     <div class="guideItem " :class="{active:$route.path === '/home'}" @click="goPath('/home')">
       <span>
-        <i class="iconfont icon-shouye2"></i>
+        <i class="iconfont icon-home"></i>
       </span>
       <span>
         首页
@@ -10,7 +10,7 @@
     </div>
     <div class="guideItem" :class="{active:$route.path === '/hear'}" @click="goPath('/hear')">
       <span>
-        <i class="iconfont icon-sousuo"></i>
+        <i class="iconfont icon-e637"></i>
       </span>
       <span>
         我听
@@ -18,7 +18,7 @@
     </div>
     <div class="guideItem" :class="{active:$route.path === '/comment'}"  @click="goPath('/comment')">
        <span>
-        <i class="iconfont icon-nav-order"></i>
+        <i class="iconfont icon-faxian1"></i>
       </span>
       <span>
         评论

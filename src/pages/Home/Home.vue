@@ -4,86 +4,49 @@
       <div class="home_container">
         <div class="home-wrapper">
           <div class="home-slide">
-            <span @click="toNavList(index)" :class="{active:NavIndex===index}" v-for="(nav, index) in navs" :key="index">{{nav}}</span>
+            <span @click="toNavList(index)" :class="{active:NavIndex===index}" v-for="(navItem, index) in nav" :key="index">{{navItem}}</span>
           </div>
         </div>
       </div>
     </div>
     <div class="list">
-      <Recommend v-if="NavIndex===0"/>
-      <Audiobook v-else-if="NavIndex===1"/>
-      <CrossTalk v-else-if="NavIndex===2"/>
-      <Music v-else-if="NavIndex===3"/>
-      <Child v-else="NavIndex===4"/>
+      <Recommend v-if="NavIndex===0" :classifyData="classifyData"/>
+      <Audiobook v-else-if="NavIndex===1" :audioBook="navs.audioBook"/>
+      <CrossTalk v-else-if="NavIndex===2" :crossTalk="navs.crossTalk"/>
+      <Music v-else-if="NavIndex===3" :music="navs.music"/>
+      <Child v-else="NavIndex===4" :child="navs.child"/>
     </div>
     <div v-show="NavIndex !==2" class="downloadApp">
       <img src="../../common/images/nav/downloadApp.png" alt="">
       
     </div>
-    <div class="homeContent">
-      <div class="contentItem">
-        <div class="contentTitle">
-          <h2>最新专辑</h2>
-          <span>更多</span>
-          <span class="more">></span>
-        </div>
-        <div class="contentDetail">
-          <div class="contentLeft">
-            <img src="../../common/images/content/1.png" alt="">
+    <div class="contentContainer">
+      <div class="homeContent">
+        <div class="contentItem" v-for="(detail, index) in details" :key="index">
+          <div class="contentTitle">
+            <h2>{{detail.theme.name}}</h2>
+            <span>更多</span>
+            <span class="more">></span>
           </div>
-          <div class="contentRight">
-            <h3>中国特色社会主义中国特色社会主义,中国特色社会主义</h3>
-            <p>“不忘初心，牢记使命,不忘初心，牢记使命,不忘初心，牢记使命,不忘初心，牢记使命,不忘初心，牢记使命”</p>
-            <span>100</span>
-            <span>1.34亿</span>
+          <div class="contentDetail" v-for="(item, index) in detail.theme.data" :key="index">
+            <div class="contentLeft">
+              <img :src="item.coverPath" alt="">
+            </div>
+            <div class="contentRight">
+              <h3>{{item.bookName}}</h3>
+              <p>“{{item.content}}”</p>
+              <span><i class="iconfont icon-yuyin1"></i>100</span>
+              <span><i class="iconfont icon-ziyuan1"></i>1.34亿</span>
+            </div>
           </div>
-        </div>
-        <div class="contentDetail">
-          <div class="contentLeft">
-            <img src="../../common/images/content/1.png" alt="">
-          </div>
-          <div class="contentRight">
-            <h3>中国特色社会主义中国特色社会主义,中国特色社会主义</h3>
-            <p>“不忘初心，牢记使命,不忘初心，牢记使命,不忘初心，牢记使命,不忘初心，牢记使命,不忘初心，牢记使命”</p>
-            <span>100</span>
-            <span>1.34亿</span>
-          </div>
-        </div>
-      </div>
-      <div class="contentItem">
-        <div class="contentTitle">
-          <h2>有声书</h2>
-          <span>更多</span>
-          <span class="more">></span>
-        </div>
-        <div class="contentDetail">
-          <div class="contentLeft">
-            <img src="../../common/images/content/1.png" alt="">
-          </div>
-          <div class="contentRight">
-            <h3>中国特色社会主义中国特色社会主义,中国特色社会主义</h3>
-            <p>“不忘初心，牢记使命,不忘初心，牢记使命,不忘初心，牢记使命,不忘初心，牢记使命,不忘初心，牢记使命”</p>
-            <span>100</span>
-            <span>1.34亿</span>
-          </div>
-        </div>
-        <div class="contentDetail">
-          <div class="contentLeft">
-            <img src="../../common/images/content/1.png" alt="">
-          </div>
-          <div class="contentRight">
-            <h3>中国特色社会主义中国特色社会主义,中国特色社会主义</h3>
-            <p>“不忘初心，牢记使命,不忘初心，牢记使命,不忘初心，牢记使命,不忘初心，牢记使命,不忘初心，牢记使命”</p>
-            <span>100</span>
-            <span>1.34亿</span>
-          </div>
-        </div>
+        </div> 
       </div>
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+  import BScroll from 'better-scroll'
   import Swiper from 'swiper'
   import 'swiper/css/swiper.min.css'
   import Recommend from '../../components/HomeList/Recommend'
@@ -92,6 +55,7 @@
   import Child from '../../components/HomeList/Child'
   import Music from '../../components/HomeList/Music'
 
+  import {mapState} from 'vuex'
   export default {
     components:{
       Recommend,
@@ -103,17 +67,37 @@
     data(){
       return{
         NavIndex:0,//导航栏选中样式
-        navs:['推荐','有声书','相声','音乐','儿童'],//头部导航数据
+        nav:['推荐','有声书','相声','音乐','儿童'],//头部导航数据
         appShow:0, //喜马拉雅APP图片是否显示
       }
     },
     methods:{
       toNavList(index){
         this.NavIndex = index
+      },
+      _initScroll(){
+        this.leftScroll = new BScroll('.contentContainer', {
+          scrollY: true, // 设置纵向滑动
+          //click: true, // 允许点击
+        })
       }
     },
-    mounted(){
-      
+    async mounted(){
+      this.$store.dispatch('getClassifyAction')
+      this.$store.dispatch('getReconmendAction')
+      this.$store.dispatch('getDetailAction')
+      this.$store.dispatch('getNavAction')
+      if(this.nav){
+        this._initScroll()
+      }
+    },
+    computed:{
+      ...mapState({
+        classifyData: state => state.classifyData,
+        reconmendData: state => state.reconmendData,
+        details: state => state.details,
+        navs:state => state.navs,
+      })
     }
   }
 </script>
@@ -159,11 +143,16 @@
         top 2px 
         right 2px
         color #fff
-    .homeContent
+    .contentContainer
+      position relative
+      overflow hidden
+      height calc(100vh - 252px)
       width 100%
-      height calc(100vh-252px)
-      .contentItem
-        padding 15px
+      .homeContent
+        position absolute
+        width 100%
+        .contentItem
+          padding 15px
         .contentTitle
           height 25px
           position relative
@@ -220,4 +209,5 @@
               min-width 55px
               margin-right 10px
               color #999
+      
 </style>
