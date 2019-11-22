@@ -53,6 +53,7 @@
             <button>去登陆</button>
           </span>
         </div>
+        <span class="sxh_gx">---——你可能感兴趣的内容——---</span>
         	<!-- cell组件 -->
           <mt-cell v-for="n in 10" title="书">
             <button>
@@ -67,8 +68,14 @@
         </mt-tab-container-item>
         <mt-tab-container-item id="tab-container2">
           <div class="sxh_dy">
-          <button>订阅</button>
+          <span class="sxh_sp">
+          <p>
+            登录后，订阅更新声音</br>
+            你可以在这收听
+          </p>
+          </span>
         </div>
+        
         	<!-- cell组件 -->
         </mt-tab-container-item>
         
@@ -111,7 +118,7 @@
           font-size 24px
     .sxh_top 
       margin-top 20px
-      margin-left 20px
+      margin-left 24px
       float left
       width 330px
       height 90px
@@ -119,7 +126,7 @@
     .sxh_bt
         width 40px
         float left 
-        margin-left 30px
+        margin-left 34px
         margin-top 20px
         text-align center
         a 
@@ -145,4 +152,8 @@
         margin-top 130px
         margin-left 100px
         color #cccccc
+    .sxh_gx
+      display block
+      text-align center
+      color #FD9480    
 </style>
