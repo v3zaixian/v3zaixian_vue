@@ -1,28 +1,20 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <HeaderGuide v-if="$route.meta.isShowHeaderGuide"/>
+    <router-view></router-view>
+    <FooterGuide v-if="$route.meta.isShowFooterGuide"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
-export default {
-  name: 'app',
-  components: {
-    HelloWorld
+  import FooterGuide from './components/FooterGuide/FooterGuide'
+  import HeaderGuide from './components/HeaderGuide/HeaderGuide'
+  export default {
+    name:'App',
+    components: {FooterGuide,HeaderGuide}
   }
-}
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="stylus" rel="stylesheet/stylus">
+
 </style>
