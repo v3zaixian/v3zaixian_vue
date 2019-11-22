@@ -6,9 +6,9 @@
   </div>
   <div class="sxh_top">
     <a class="sxh_bt">
-      <i class="iconfont icon-shouye2"</i>
-      <span>下载</span>
-      </a>
+    <i class="icon-question"></i>
+      下载
+    </a>
     <button class="sxh_bt">历史</button>
     <button class="sxh_bt">已购</button>
     <button class="sxh_bt">听单</button>
@@ -20,10 +20,14 @@
   <div class="title_left">
     <form>
       <div :class="{on:!isPassWordLogin}">
-        1
+        <section class="sxh_message">
+          1
+        </section>
       </div>
       <div :class="{on:isPassWordLogin}">
-        2
+        <section class="sxh_message">
+          2
+        </section>
       </div>
     </form>
   </div>
@@ -84,6 +88,11 @@
           display none
           &.on
             display block
+          .login_message
+            position relative
+            margin-top 10px
+            font-size 16px
+            background #fff  
               
       
 </style>
