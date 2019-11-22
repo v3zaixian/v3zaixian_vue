@@ -2,24 +2,35 @@
 <div class="listen">
   <div class="listen_top">
     <h2>我听</h2>
+      <span>
+        <i class="iconfont icon-chazhaobiaodanliebiao1"></i>
+      </span>
   </div>
   <div class="sxh_top">
-    <a class="sxh_bt">
+    <div class="sxh_bt">
+    <a>
     <i class="iconfont icon-yiwancheng"></i>
       下载
     </a>
-    <a class="sxh_bt">
-    <i class="iconfont icon-kefu1"></i>
+    </div>
+    <div class="sxh_bt">
+    <a>
+    <i class="iconfont icon-guanyu"></i>
       历史
     </a>
-    <a class="sxh_bt">
+    </div>
+    <div class="sxh_bt">
+    <a>
     <i class="iconfont icon-gouwuche-"></i>
       已购
     </a>
-    <a class="sxh_bt">
-    <i class="iconfont icon-dingdan"></i>
+    </div>
+    <div class="sxh_bt">
+    <a>
+    <i class="iconfont icon-kefu1"></i>
       听单
     </a>
+    </div>
   </div>
   <!-- <div class="sxh_header_title">
     <a href="javascript:;" class="{on:!isPassWordLogin}" @click="isPassWordLogin = false">订阅</a>
@@ -83,7 +94,6 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-  
   .listen
     width 100%
     .listen_top
@@ -93,22 +103,29 @@
         height 30px
         line-height 30px
         font-size 18px 
+      span
+        position relative
+        bottom 26px
+        left 330px
+        i 
+          font-size 24px
     .sxh_top 
       margin-top 20px
       margin-left 20px
       float left
       width 330px
       height 90px
-      box-shadow: 2px 3px 1px #888888
+      box-shadow:  1px 1px 5px  -1px #888888
     .sxh_bt
-        width 30px
-        height 40px
-        float left
-        margin-left 40px
-        margin-top 40px
-        >i 
-          margin-top 10px
-          color #FD9480
+        width 40px
+        float left 
+        margin-left 30px
+        margin-top 20px
+        text-align center
+        a 
+          i 
+            font-size 42px
+            color #FD9480
     .item 
       display: inline-block
     .nav
@@ -127,4 +144,5 @@
         float left
         margin-top 130px
         margin-left 100px
+        color #cccccc
 </style>
