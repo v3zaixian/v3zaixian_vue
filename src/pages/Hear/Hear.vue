@@ -2,36 +2,68 @@
 <div class="listen">
   <div class="listen_top">
     <h2>我听</h2>
-    
   </div>
   <div class="sxh_top">
     <a class="sxh_bt">
-    <i class="icon-question"></i>
+    <i class="iconfont icon-yiwancheng"></i>
       下载
     </a>
-    <button class="sxh_bt">历史</button>
-    <button class="sxh_bt">已购</button>
-    <button class="sxh_bt">听单</button>
+    <a class="sxh_bt">
+    <i class="iconfont icon-kefu1"></i>
+      历史
+    </a>
+    <a class="sxh_bt">
+    <i class="iconfont icon-gouwuche-"></i>
+      已购
+    </a>
+    <a class="sxh_bt">
+    <i class="iconfont icon-dingdan"></i>
+      听单
+    </a>
   </div>
-  <div class="sxh_header_title">
+  <!-- <div class="sxh_header_title">
     <a href="javascript:;" class="{on:!isPassWordLogin}" @click="isPassWordLogin = false">订阅</a>
     <a href="javascript:;" class="{on:!isPassWordLogin}" @click="isPassWordLogin = true">听更新</a>
+  </div> -->
+     <div>
+    <div class="nav">
+      <mt-button size="small" @click.native.prevent="active = 'tab-container1'">订阅</mt-button>
+      <mt-button size="small" @click.native.prevent="active = 'tab-container2'">听更新</mt-button>
+    </div>
+    <div class="page-tab-container">
+      <mt-tab-container class="page-tabbar-tab-container" v-model="active" swipeable>
+        <mt-tab-container-item id="tab-container1"> 
+        <div class="sxh_dy">
+          <span class="sxh_sp">
+          <p>
+            登录后，订阅更新声音</br>
+            你可以在这收听
+          </p>
+            <button>去登陆</button>
+          </span>
+        </div>
+        	<!-- cell组件 -->
+          <mt-cell v-for="n in 10" title="书">
+            <button>
+              订阅
+            </button>
+          </mt-cell>
+          <mt-cell>
+            <div>
+              <button>订阅</button>
+            </div>
+          </mt-cell>
+        </mt-tab-container-item>
+        <mt-tab-container-item id="tab-container2">
+          <div class="sxh_dy">
+          <button>订阅</button>
+        </div>
+        	<!-- cell组件 -->
+        </mt-tab-container-item>
+        
+      </mt-tab-container>
+    </div>
   </div>
-  <div class="title_left">
-    <form>
-      <div :class="{on:!isPassWordLogin}">
-        <section class="sxh_message">
-          1
-        </section>
-      </div>
-      <div :class="{on:isPassWordLogin}">
-        <section class="sxh_message">
-          2
-        </section>
-      </div>
-    </form>
-  </div>
-     
 </div>
 </template>
 
@@ -39,11 +71,14 @@
   
   
   export default {
+    name: 'page-tab-container',
      data(){
        return{
          isPassWordLogin:false,
+         active: 'tab-container1'
        }
      }
+     
   }
 </script>
 
@@ -59,40 +94,37 @@
         line-height 30px
         font-size 18px 
     .sxh_top 
-      margin-top 40px
+      margin-top 20px
       margin-left 20px
       float left
       width 330px
       height 90px
       box-shadow: 2px 3px 1px #888888
     .sxh_bt
-        margin-left 30px
-        margin-top 35px
-    .sxh_header_title
-      margin-top :200px
+        width 30px
+        height 40px
+        float left
+        margin-left 40px
+        margin-top 40px
+        >i 
+          margin-top 10px
+          color #FD9480
+    .item 
+      display: inline-block
+    .nav
+      margin-top :150px
       padding-top 10px
       text-align left 
-      >a
-        color #333
-        font-size 18px
-        padding-bottom 4px
-        &:first-child
-          margin-right 40px
-        &.on
-          color #02a774
-          font-wight 700
-          border-bottom 2px solid #02a774
-    .title_letf
-      >from
-        >div
-          display none
-          &.on
-            display block
-          .login_message
-            position relative
-            margin-top 10px
-            font-size 16px
-            background #fff  
-              
-      
+      padding: 10px
+    .link 
+      color: inherit
+      padding: 20px
+      display: block
+    .sxh_dy
+      width 100%
+      height 370px
+      .sxh_sp  
+        float left
+        margin-top 130px
+        margin-left 100px
 </style>
