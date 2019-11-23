@@ -3,6 +3,7 @@ let Comment  = () => import('../pages/Comment/Comment')
 let Hear  = () => import('../pages/Hear/Hear')
 let Profile  = () => import('../pages/Profile/Profile')
 let Category  = () => import('../pages/Category/Category')
+let Details = () =>import('../pages/Details/Details')
 
 export default [
   // {
@@ -41,6 +42,13 @@ export default [
   {
     path: '/profile',
     component: Profile,
+    meta: {
+      isShowFooterGuide: true
+    }
+  },
+  {
+    path: '/details',
+    component: Details,
     meta: {
       isShowFooterGuide: true
     }

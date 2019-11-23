@@ -7,7 +7,7 @@
       </span>
   </div>
   <div class="sxh_top">
-    <div class="sxh_bt">
+    <div class="sxh_bt" :class="{active:$route.path === '/details'}" @click="goPath('/details')">
     <a>
     <i class="iconfont icon-yiwancheng"></i>
       下载
@@ -56,6 +56,7 @@
         <span class="sxh_gx">---——你可能感兴趣的内容——---</span>
         	<!-- cell组件 -->
           <mt-cell v-for="n in 10" title="书">
+
             <button>
               订阅
             </button>
@@ -95,13 +96,22 @@
          isPassWordLogin:false,
          active: 'tab-container1'
        }
-     }
-     
+     },
+     methods: {
+      goPath(path){
+        // $router(路由器对象，包含了路由跳转的方法) $route(路由信息对象， 包含当前路由的所有路由信息)
+        this.$route.path !== path && this.$router.replace(path)
+        // this.$router.push() 
+        //——overflow: scroll touch-action: none 解决上拉加载报错
+      }
+    }
   }
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
   .listen
+    overflow: scroll
+    touch-action: none 
     width 100%
     .listen_top
       width 100%
