@@ -36,7 +36,7 @@ export default {
   },
   async getBooksFenleiAction({commit}){
     let result = await getbookfenlei()
-    console.log(result)
+    // console.log(result)
     commit(SAVE_BOOKFENLEI, {bookfenlei: result})
   },
 }

@@ -35,7 +35,16 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
+@import '../../assets/stylus/mixins.styl';
 #commentContainer
+  z-index 100
+  background #fff
+  width 100%
+  height 136px
+  position fixed
+  left 0
+  top 0
+  clearFix()
   .iconfont
     font-size 24px
   .off

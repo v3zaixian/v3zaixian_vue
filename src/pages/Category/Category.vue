@@ -2,20 +2,20 @@
   <div id="categoryContainer">
     <div class="leftContainer">
       <ul ref="leftUl" class="navList">
-        <li @click="changeNavIndex(index)" class="navItem" :class="{active: navIndex === index}" v-for="(category, index) in categorys" :key="index">
-          <p>{{category.name}}</p>
+        <li @click="changeNavIndex(index)" class="navItem" :class="{active: navIndex === index}" v-for="(bookContent, index) in bookfenlei" :key="index">
+          <p>{{bookContent.name}}</p>
         </li>
       </ul>
     </div>
     <div class="rightContainer">
-      <ul ref="rightUl">
-        <li class="food-list-hook" v-for="(detail, index) in details" :key="index">
-          <h1 class="title">{{detail.name}}</h1>
+      <ul ref="rightUl" class="contentNav">
+        <li class="food-list-hook" v-for="(bookContent, index) in bookfenlei" :key="index">
+          <h1 class="title">{{bookContent.name}}</h1>
           <div class="contentfenlei">
-            <img :src="bookfenlei.coverPath" alt="">
+            <img :src="bookContent.coverPath" alt="">
             <span>
-              <h3>{{bookfenlei.title}}</h3>
-              <p>{{bookfenlei.subtitle}}</p>
+              <h3>{{bookContent.title}}</h3>
+              <p>{{bookContent.subtitle}}</p>
             </span>
           </div>
         </li>
@@ -38,19 +38,17 @@
         test: {
 
         },
-        categorys:[{name:'文学'},{name:'儿童'},{name:'音乐'},{name:'历史'},{name:'有声'},{name:'文学'},{name:'儿童'},{name:'音乐'},{name:'历史'},{name:'有声'},{name:'文学'}],
-        details:[{name:'文学'},{name:'儿童'},{name:'音乐'},{name:'历史'},{name:'有声'},{name:'文学'},{name:'儿童'},{name:'音乐'},{name:'历史'},{name:'有声'},{name:'文学'}]
       }
     },
     async mounted(){
-      if(this.details){
+      if(this.bookfenlei){
         
         this._initScroll()
         this._initTops()
       }
 
       this.$store.dispatch('getBooksFenleiAction')
-      console.log(this.bookfenlei)
+      // console.log(this.bookfenlei)
     },
     computed:{
       navIndex(){
@@ -78,15 +76,12 @@
         })
         this.rightScroll = new BScroll('.rightContainer', {
           scrollY: true, // 设置纵向滑动
-          // probeType: 1, // 非实时
           probeType: 2, // 实时
-          // probeType: 3, // 实时/惯性滑动
-          // click: true, // 允许点击
         })
         
         this.rightScroll.on('scroll', ({x, y}) => {
           this.scrollY = Math.abs(y)
-           console.log(this.scrollY)
+          //  console.log(this.scrollY)
         })
 
         this.rightScroll.on('scrollEnd', ({x, y}) => {
@@ -108,16 +103,16 @@
       },
       changeNavIndex(index){
         this.scrollY = this.tops[index]
-        
+        // console.log(this.rightScroll)
+        // console.log(this)
         this.rightScroll.scrollTo(0, -this.scrollY, 2000)
       }
     },
     watch:{
-      details(){
+      bookfenlei(){
         this.$nextTick(() => { // 页面下一次全部渲染完毕
           this._initScroll()
-          this._initTops()
-          
+          this._initTops() 
         })
       }
     },

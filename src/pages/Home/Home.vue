@@ -24,17 +24,17 @@
       <div class="homeContent">
         <div class="contentItem" v-for="(detail, index) in details" :key="index">
           <div class="contentTitle">
-            <h2>{{detail.theme.name}}</h2>
+            <h2>{{detail.name}}</h2>
             <span>更多</span>
             <span class="more">></span>
           </div>
-          <div class="contentDetail" v-for="(item, index) in detail.theme.data" :key="index" @click="goDatil(index)">
+          <div class="contentDetail" v-for="(detailBook, index) in details[index].data" :key="index" @click="goDatil(index)">
             <div class="contentLeft">
-              <img :src="item.coverPath" alt="">
+              <img :src="detailBook.coverPath" alt="">
             </div>
             <div class="contentRight">
-              <h3>{{item.bookName}}</h3>
-              <p>“{{item.content}}”</p>
+              <h3>{{detailBook.bookName}}</h3>
+              <p>{{detailBook.content}}</p>
               <span><i class="iconfont icon-yuyin1"></i>100</span>
               <span><i class="iconfont icon-ziyuan1"></i>1.34亿</span>
             </div>
@@ -83,7 +83,8 @@
         })
       },
       goDatil(index){
-        this.$router.push('/home/datil')
+        // this.$router.push(`/home/datil?${index}`)
+        this.$router.push({name:'datil',params:{index}})
         console.log(index)
 
       }

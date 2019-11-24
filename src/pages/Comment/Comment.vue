@@ -35,6 +35,14 @@ import CommentHeader from '../../components/CommentHeader/CommentHeader'
 <style lang="stylus" rel="stylesheet/stylus" scoped>
 @import '../../assets/stylus/mixins.styl';
 .commentNav
+  z-index 100
+  background #fff
+  width 100%
+  height 24px
+  position fixed
+  left 0
+  top 136px
+  clearFix()
   .crdBtn
     display flex
     padding 0 0 10px 10px

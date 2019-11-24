@@ -18,6 +18,7 @@ export default [
   {
     path: '/home',
     component: Home,
+    
     meta: {
       isShowFooterGuide: true,
       isShowHeaderGuide:true
@@ -25,6 +26,7 @@ export default [
   },
   {
     path:'/home/datil',
+    name:'datil',
     component:HomeDatil
   },
   {

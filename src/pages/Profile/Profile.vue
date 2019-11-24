@@ -206,6 +206,13 @@
     font-size 24px
     
   .emailAndSet
+    z-index 100
+    background #fff
+    width 100%
+    height 37px
+    position fixed
+    left 0
+    top 0px
     .email
       position absolute
       top 8px
