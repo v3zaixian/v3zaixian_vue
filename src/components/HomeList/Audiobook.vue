@@ -1,7 +1,7 @@
 <template>
   <div id="audioBook">
-    <div v-for="(item, index) in audioBook.imgData" :key="index">
-      <img :src="audioBook.imgData[0]" alt="">
+    <div>
+      <img src="../../common/images/audioBook/6.jpg" alt="">
     </div>
   </div>
 </template>

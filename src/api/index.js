@@ -18,3 +18,8 @@ export const getDetail = () => ajax({
 export const getNav = () => ajax({
   url: `/navData`
 })
+
+// 首页分信息
+export const getbookfenlei = () => ajax({
+  url: `/booksfenlei/`
+})

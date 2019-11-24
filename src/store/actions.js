@@ -2,13 +2,15 @@ import {
   getNav,
   getClassify,
   getReconmend,
-  getDetail
+  getDetail,
+  getbookfenlei
 } from '../api'
 import {
   SAVE_CLASSIFYDATA,
   SAVE_RECONMENDDATA,
   SAVE_DETAILS,
-  SAVE_NAVS
+  SAVE_NAVS,
+  SAVE_BOOKFENLEI
 } from "./mutation-type";
 
 
@@ -31,5 +33,10 @@ export default {
   async getNavAction({commit}){
     let result = await getNav()
     commit(SAVE_NAVS, {navs: result})
+  },
+  async getBooksFenleiAction({commit}){
+    let result = await getbookfenlei()
+    console.log(result)
+    commit(SAVE_BOOKFENLEI, {bookfenlei: result})
   },
 }

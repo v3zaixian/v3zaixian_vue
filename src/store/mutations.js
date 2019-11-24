@@ -3,6 +3,7 @@ import {
   SAVE_RECONMENDDATA,
   SAVE_DETAILS,
   SAVE_NAVS,
+  SAVE_BOOKFENLEI
 } from './mutation-type'
 
 
@@ -20,5 +21,8 @@ export default {
   },
   [SAVE_DETAILS](state, {details}){
     state.details = details
+  },
+  [SAVE_BOOKFENLEI](state, {bookfenlei}){
+    state.bookfenlei = bookfenlei
   },
 }

@@ -6,7 +6,7 @@ import Recommend from '../pages/Comment/Recommend/Recommend.vue'
 import Dub from '../pages/Comment/Dub/Dub.vue'
 import Home from '../pages/Home/Home.vue'
 import Category from '../pages/Category/Category.vue'
-import Hear from '../pages/Comment/Hear/Hear.vue'
+import Hear from '../pages/Hear/Hear.vue'
 import HomeDatil from '../pages/HomeDatil/HomeDatil.vue'
 
 

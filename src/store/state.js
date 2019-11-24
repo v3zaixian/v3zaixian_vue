@@ -4,4 +4,5 @@ export default {
   classifyData: [], // 首页分类数据 /fenlei
   reconmendData: {}, // 推荐的榜单数据 /tuijian/bangdan,还未使用
   details: [], // 首页详情信息  /shouye
+  bookfenlei:[],//图书分类信息
 }

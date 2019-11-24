@@ -9,11 +9,12 @@
       </span>
       <button class="btnApp">打开APP</button>
     </div>
-    <div>
-      <img src="../../common/images/audioBook/1.jpg" style="width:100%" alt="">
+    <div class="booksImg">
+      <!-- <img :src="booksDatas[0].coverPath" style="width:100%" alt=""> -->
+      <img src="../../common/images/content/1.png" style="width:100%" alt="暂无图片">
     </div>
     <div class="datilTitle">
-      <h3 class="text">中国特色社会主义中国特色社会主义,中国特色社会主义</h3>
+      <h3 class="text">{{booksDatas[0].bookName}}</h3>
       <button class="openBtn">打开APP，完整收听</button>
     </div>
     <div class="datilList">
@@ -24,11 +25,11 @@
       </span>
     </div>
     <div class="contentCantonter">
-      <ul class="content">
-        <li>
+      <ul class="content" v-for="(book, index) in booksDatas" :key="index">
+        <li >
           <span class="iconfont icon-bofang"></span>
           <div class="contentText">
-            <p >中国特色社会主义中国特色社会主义,中国特色社会主义</p>
+            <p>{{book.content}}</p>
           </div>
           <span class="iconfont icon-xiazai1"></span>
         </li>
@@ -38,7 +39,40 @@
 </template>
 
 <script type="text/ecmascript-6">
+import {mapState} from 'vuex'
+  
   export default {
+    
+    data() {
+      return {
+        booksDatas:{},
+        index:0
+      }
+    },
+
+    async mounted() {
+      if (this.index>this.details[0].theme.data.length) {
+        this.index = 0
+      }
+      this.index++
+      this.booksDatas = this.details[0].theme.data
+      console.log(this.details[0].theme.data)
+      // console.log(this.booksDatas[0].coverPath)
+    },
+
+    computed: {
+      ...mapState({
+        details:state => state.details
+      })
+    },
+
+    watch: {
+      details(){
+        this.$nextTick(()=>{
+          this.booksDatas = this.details[0].theme.data
+        })
+      }
+    },
   }
 </script>
 
@@ -75,6 +109,10 @@
       color white
       background #f86442
       border 0
+  .booksImg
+    width 100%
+    height 200px
+    overflow hidden
   .datilTitle
     margin-top 16px
     padding-left 30px
@@ -114,6 +152,7 @@
       margin-top 20px
       display flex
       li
+        width 100%
         position relative
         display flex
         .icon-bofang
@@ -124,7 +163,8 @@
         .contentText
           width 60%
           height 32px
-          // white-space nowrap
+          line-height 32px
+          white-space nowrap
           display block
           overflow hidden
           text-overflow ellipsis

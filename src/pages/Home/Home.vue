@@ -84,6 +84,8 @@
       },
       goDatil(index){
         this.$router.push('/home/datil')
+        console.log(index)
+
       }
     },
     async mounted(){

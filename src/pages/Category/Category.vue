@@ -11,7 +11,13 @@
       <ul ref="rightUl">
         <li class="food-list-hook" v-for="(detail, index) in details" :key="index">
           <h1 class="title">{{detail.name}}</h1>
-          <p>喜马拉雅喜马拉雅喜马拉雅喜马拉雅喜马拉雅喜马拉雅喜马拉雅喜马拉雅喜马拉雅喜马拉雅喜马拉雅喜马拉雅喜马拉雅喜马拉雅喜马拉雅喜马拉雅喜马拉雅喜马拉雅喜马拉雅喜马拉雅喜马拉雅喜马拉雅喜马拉雅喜马拉雅喜马拉雅喜马拉雅</p>
+          <div class="contentfenlei">
+            <img :src="bookfenlei.coverPath" alt="">
+            <span>
+              <h3>{{bookfenlei.title}}</h3>
+              <p>{{bookfenlei.subtitle}}</p>
+            </span>
+          </div>
         </li>
       </ul>
     </div>
@@ -20,6 +26,9 @@
 
 <script type="text/ecmascript-6">
   import BScroll from 'better-scroll'
+  import { 
+    mapState
+   } from 'vuex'
   export default {
     data(){
       return {
@@ -33,12 +42,15 @@
         details:[{name:'文学'},{name:'儿童'},{name:'音乐'},{name:'历史'},{name:'有声'},{name:'文学'},{name:'儿童'},{name:'音乐'},{name:'历史'},{name:'有声'},{name:'文学'}]
       }
     },
-    mounted(){
+    async mounted(){
       if(this.details){
         
         this._initScroll()
         this._initTops()
       }
+
+      this.$store.dispatch('getBooksFenleiAction')
+      console.log(this.bookfenlei)
     },
     computed:{
       navIndex(){
@@ -52,7 +64,11 @@
           this.leftScroll.scrollToElement(this.$refs.leftUl.children[index], 2000)
         }
         return index
-      }
+      },
+
+      ...mapState({
+        bookfenlei:state => state.bookfenlei
+      })
     },
     methods:{
       _initScroll(){
@@ -97,7 +113,7 @@
       }
     },
     watch:{
-      details(newValue, oldValue){
+      details(){
         this.$nextTick(() => { // 页面下一次全部渲染完毕
           this._initScroll()
           this._initTops()
@@ -144,7 +160,24 @@
         background: #f3f5f7
         font-size 16px
         color: #72727b
-      p 
-        text-indent 24px
-        font-size 12px
+      .contentfenlei
+        display flex
+        img
+          width 100px
+          height 100px
+          margin-right 10px
+        span 
+          h3
+            font-size 20px
+            font-weight bold
+            color #f86442
+            margin-top 10px
+          p 
+            padding-top 8px
+            // text-indent 24px
+            font-size 16px
+            // white-space nowrap
+            // display block
+            // overflow hidden
+            // text-overflow ellipsis
 </style>
