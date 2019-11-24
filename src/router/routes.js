@@ -4,7 +4,7 @@ let Hear  = () => import('../pages/Hear/Hear')
 let Profile  = () => import('../pages/Profile/Profile')
 let Category  = () => import('../pages/Category/Category')
 let Details = () =>import('../pages/Details/Details')
-
+let History = () =>import('../pages/History/History')
 export default [
   // {
   //     path: '路由路径',
@@ -49,6 +49,13 @@ export default [
   {
     path: '/details',
     component: Details,
+    meta: {
+      isShowFooterGuide: true
+    }
+  },
+  {
+    path: '/history',
+    component: History,
     meta: {
       isShowFooterGuide: true
     }

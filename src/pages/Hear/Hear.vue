@@ -13,19 +13,19 @@
       下载
     </a>
     </div>
-    <div class="sxh_bt">
+    <div class="sxh_bt" :class="{active:$route.path === '/history'}" @click="goPath('/history')">
     <a>
     <i class="iconfont icon-guanyu"></i>
       历史
     </a>
     </div>
-    <div class="sxh_bt">
+    <div class="sxh_bt" :class="{active:$route.path === '/details'}" @click="goPath('/details')">
     <a>
     <i class="iconfont icon-gouwuche-"></i>
       已购
     </a>
     </div>
-    <div class="sxh_bt">
+    <div class="sxh_bt" :class="{active:$route.path === '/history'}" @click="goPath('/history')">
     <a>
     <i class="iconfont icon-kefu1"></i>
       听单
@@ -50,12 +50,12 @@
             登录后，订阅更新声音</br>
             你可以在这收听
           </p>
-            <button>去登陆</button>
+            <button class="sxh_bto">去登陆</button>
           </span>
         </div>
         <span class="sxh_gx">---——你可能感兴趣的内容——---</span>
         	<!-- cell组件 -->
-          <mt-cell v-for="n in 10" title="书">
+          <mt-cell v-for="n in 10" title="听书">
 
             <button>
               订阅
@@ -99,7 +99,8 @@
      },
      methods: {
       goPath(path){
-        // $router(路由器对象，包含了路由跳转的方法) $route(路由信息对象， 包含当前路由的所有路由信息)
+        // $router(路由器对象，包含了路由跳转的方法)
+        // $route(路由信息对象， 包含当前路由的所有路由信息)
         this.$route.path !== path && this.$router.replace(path)
         // this.$router.push() 
         //——overflow: scroll touch-action: none 解决上拉加载报错
@@ -131,7 +132,7 @@
       margin-left 24px
       float left
       width 330px
-      height 90px
+      height 95px
       box-shadow:  1px 1px 5px  -1px #888888
     .sxh_bt
         width 40px
@@ -159,9 +160,15 @@
       height 370px
       .sxh_sp  
         float left
-        margin-top 130px
-        margin-left 100px
+        margin-top 120px
+        margin-left 130px
         color #cccccc
+      .sxh_bto
+        background-color #fff
+        margin-top 10px
+        border 1px solid #cccccc
+        width 120px
+        height 40px
     .sxh_gx
       display block
       text-align center

@@ -1,13 +1,13 @@
 <template>
   <div>
-    <div :class="{active:$route.path === '/hear'}" @click="goPath('/hear')"> ← </div>
+    <div :class="{active:$route.path === '/hear'}" @click="goPath('/hear')"> <span class="sxh_jt"> ← </span> </div>
     <div class="nav">
       <mt-button size="small" @click.native.prevent="active = 'tab-container1'">专辑</mt-button>
       <mt-button size="small" @click.native.prevent="active = 'tab-container2'">声音</mt-button>
       <mt-button size="small" @click.native.prevent="active = 'tab-container3'">视频</mt-button>
     </div>
     <div class="sxh_zy"> 
-      <p>已占用0B/可用空间64G</p>
+      <p>已占用0MB/可用空间64G</p>
     </div>
     <div class="page-tab-container">
       <mt-tab-container class="page-tabbar-tab-container" v-model="active" swipeable>
@@ -98,4 +98,10 @@ export default {
  .sxh_p{
    margin-bottom: 20px;
  }
+ .sxh_jt{
+   float: left;
+   margin-top: 12px;
+   font-size: 24px;
+ }
+
 </style>

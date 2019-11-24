@@ -4,7 +4,10 @@ import 'lib-flexible/flexible'
 import {Button} from 'mint-ui'
 import { TabContainer, TabContainerItem } from 'mint-ui';
 import { Cell } from 'mint-ui';
+import { Navbar, TabItem } from 'mint-ui';
 
+Vue.component(Navbar.name, Navbar);
+Vue.component(TabItem.name, TabItem);
 Vue.component(Cell.name, Cell);
 Vue.component(TabContainer.name, TabContainer);
 
