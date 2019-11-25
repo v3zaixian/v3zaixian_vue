@@ -12,7 +12,7 @@ import {
   SAVE_DETAILS,
   SAVE_NAVS,
   SAVE_BOOKFENLEI,
-  //SAVE_TOKEN,
+  SAVE_TOKEN,
   SAVE_USER
 } from "./mutation-type";
 
