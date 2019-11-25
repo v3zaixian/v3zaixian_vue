@@ -50,7 +50,6 @@
             登录后，订阅更新声音</br>
             你可以在这收听
           </p>
-            <button>去登陆</button>
           </span>
         </div>
         <span class="sxh_gx">---——你可能感兴趣的内容——---</span>
