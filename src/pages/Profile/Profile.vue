@@ -206,7 +206,7 @@
       new BScroll('.cantonter', {
         scrollY: true, // 设置纵向滑动
       })
-      this.$store.dispatch('autoLoginAction')
+     // this.$store.dispatch('autoLoginAction')
     },
 
     computed: {

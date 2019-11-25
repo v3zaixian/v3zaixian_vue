@@ -46,9 +46,15 @@
     methods: {
       goPath(path){
         // $router(路由器对象，包含了路由跳转的方法) $route(路由信息对象， 包含当前路由的所有路由信息)
+        if(path === '/comment'){
+          path = '/comment/concern'
+        }
         this.$route.path !== path && this.$router.replace(path)
         // this.$router.push()
-        if (this.$route.path === path) {
+        let routePath = this.$route.path.slice(1,8)
+        if (routePath === 'comment') {
+          this.isShow = true
+        }else{
           this.isShow = false
         }
       }

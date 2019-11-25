@@ -18,7 +18,6 @@ export default [
   {
     path: '/home',
     component: Home,
-    
     meta: {
       isShowFooterGuide: true,
       isShowHeaderGuide:true
@@ -78,11 +77,6 @@ export default [
           isShowFooterGuide: true,
         }
       },
-      {
-        path: '/comment',
-        redirect: '/comment/concern'
-      },
-      
     ]
     
   },

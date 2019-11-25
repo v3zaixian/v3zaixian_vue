@@ -4,7 +4,7 @@ import {
   getReconmend,
   getDetail,
   getbookfenlei,
-  autoLogin
+  
 } from '../api'
 import {
   SAVE_CLASSIFYDATA,
@@ -12,7 +12,7 @@ import {
   SAVE_DETAILS,
   SAVE_NAVS,
   SAVE_BOOKFENLEI,
-  SAVE_TOKEN,
+  //SAVE_TOKEN,
   SAVE_USER
 } from "./mutation-type";
 
@@ -52,10 +52,10 @@ export default {
   },
 
   // 七天自动登录：获取用户信息
-  async autoLoginAction({commit},){
+  /* async autoLoginAction({commit},){
     let result = await autoLogin()
     if (result.code === 0) {
       commit(SAVE_USER,{user:result.data})
     }
-  }
+  } */
 }
