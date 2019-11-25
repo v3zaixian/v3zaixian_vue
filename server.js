@@ -1,6 +1,8 @@
 const express = require('express')
 const cors = require('cors')
 
+const sms_util = require('./util/sms_util')
+
 const app = express()
 
 app.use(express.static(__dirname+'/public'))
@@ -12,6 +14,7 @@ app.use(express.urlencoded())
 // 能解析json格式的请求体参数
 app.use(express.json())
 
+const users = {}
 app.get('/fenlei', (req, res) => {
   
   setTimeout(() => {
@@ -96,50 +99,171 @@ app.get('/shouye',(req,res) =>{
   setTimeout(() => {
     res.send(
       [
+        // 最新专辑
         {
-          "theme": {
-            "name":'最新专辑',
-            "data":[
-              {
-                "id": 1,
-                "title": "new",
-                "bookName": "读者",
-                "coverPath": "http://localhost:3000/content/1.png",
-                "content":"读者经典故事选集，有你故事"
-              },
-              {
-                "id": 2,
-                "title": "new",
-                "bookName": "小王子",
-                "coverPath": "http://localhost:3000/content/2.png",
-                "content":"小王子爱着玫瑰，每天浇水却不能体会"
-              },
-              {
-                "id": 3,
-                "title": "new",
-                "bookName": "世界神秘档案",
-                "coverPath": "http://localhost:3000/content/3.png",
-                "content":"从南到北，从东到西，人类文明不可解释的奇闻异事"
-              },
-              {
-                "id": 4,
-                "title": "new",
-                "bookName": "古今大战秦俑情",
-                "coverPath": "http://localhost:3000/content/4.png",
-                "content":"秦王统一，兵佣穿越千年的悲歌"
-              },
-              {
-                "id": 5,
-                "title": "new",
-                "bookName": "档案",
-                "coverPath": "http://localhost:3000/content/5.png",
-                "content":"一本档案一段尘封许久的往事"
-              },
-            ]
-          },
+          "name":'最新专辑',
+          "data":[
+            {
+              "id": 1,
+              "title": "new",
+              "bookName": "读者",
+              "coverPath": "http://localhost:3000/content/1.png",
+              "content":"读者经典故事选集，有你故事",
+              "contentList":[
+                {
+                  "listTitle":"读者经典故事选集，有你故事"
+                },
+                {
+                  "listTitle":"读者经典故事选集，有你故事"
+                },
+                {
+                  "listTitle":"读者经典故事选集，有你故事"
+                },
+                {
+                  "listTitle":"读者经典故事选集，有你故事"
+                },
+                {
+                  "listTitle":"读者经典故事选集，有你故事"
+                },
+                {
+                  "listTitle":"读者经典故事选集，有你故事"
+                },
+                {
+                  "listTitle":"读者经典故事选集，有你故事"
+                },
+                {
+                  "listTitle":"读者经典故事选集，有你故事"
+                },
+                {
+                  "listTitle":"读者经典故事选集，有你故事"
+                },
+                {
+                  "listTitle":"读者经典故事选集，有你故事"
+                }
+              ]
+            },
+            {
+              "id": 2,
+              "title": "new",
+              "bookName": "小王子",
+              "coverPath": "http://localhost:3000/content/2.png",
+              "content":"小王子爱着玫瑰，每天浇水却不能体会",
+              "contentList":[
+                {
+                  "listTitle":"小王子爱着玫瑰，每天浇水却不能体会"
+                },
+                {
+                  "listTitle":"小王子爱着玫瑰，每天浇水却不能体会"
+                },
+                {
+                  "listTitle":"小王子爱着玫瑰，每天浇水却不能体会"
+                },
+                {
+                  "listTitle":"小王子爱着玫瑰，每天浇水却不能体会"
+                },
+                {
+                  "listTitle":"小王子爱着玫瑰，每天浇水却不能体会"
+                },
+                {
+                  "listTitle":"小王子爱着玫瑰，每天浇水却不能体会"
+                },
+                {
+                  "listTitle":"小王子爱着玫瑰，每天浇水却不能体会"
+                },
+                {
+                  "listTitle":"小王子爱着玫瑰，每天浇水却不能体会"
+                },
+                {
+                  "listTitle":"小王子爱着玫瑰，每天浇水却不能体会"
+                },
+                {
+                  "listTitle":"小王子爱着玫瑰，每天浇水却不能体会"
+                }
+              ]
+            },
+            {
+              "id": 3,
+              "title": "new",
+              "bookName": "世界神秘档案",
+              "coverPath": "http://localhost:3000/content/3.png",
+              "content":"从南到北，从东到西，人类文明不可解释的奇闻异事",
+              "contentList":[
+                {
+                  "listTitle":"从南到北，从东到西，人类文明不可解释的奇闻异事"
+                },
+                {
+                  "listTitle":"从南到北，从东到西，人类文明不可解释的奇闻异事"
+                },
+                {
+                  "listTitle":"从南到北，从东到西，人类文明不可解释的奇闻异事"
+                },
+                {
+                  "listTitle":"从南到北，从东到西，人类文明不可解释的奇闻异事"
+                },
+                {
+                  "listTitle":"从南到北，从东到西，人类文明不可解释的奇闻异事"
+                },
+                {
+                  "listTitle":"从南到北，从东到西，人类文明不可解释的奇闻异事"
+                },
+                {
+                  "listTitle":"从南到北，从东到西，人类文明不可解释的奇闻异事"
+                },
+                {
+                  "listTitle":"从南到北，从东到西，人类文明不可解释的奇闻异事"
+                },
+                {
+                  "listTitle":"从南到北，从东到西，人类文明不可解释的奇闻异事"
+                },
+                {
+                  "listTitle":"从南到北，从东到西，人类文明不可解释的奇闻异事"
+                }
+              ]
+            },
+            {
+              "id": 4,
+              "title": "new",
+              "bookName": "古今大战秦俑情",
+              "coverPath": "http://localhost:3000/content/4.png",
+              "content":"秦王统一，兵佣穿越千年的悲歌",
+              "contentList":[
+                {
+                  "listTitle":"秦王统一，兵佣穿越千年的悲歌"
+                },
+                {
+                  "listTitle":"秦王统一，兵佣穿越千年的悲歌"
+                },
+                {
+                  "listTitle":"秦王统一，兵佣穿越千年的悲歌"
+                },
+                {
+                  "listTitle":"秦王统一，兵佣穿越千年的悲歌"
+                },
+                {
+                  "listTitle":"秦王统一，兵佣穿越千年的悲歌"
+                },
+                {
+                  "listTitle":"秦王统一，兵佣穿越千年的悲歌"
+                },
+                {
+                  "listTitle":"秦王统一，兵佣穿越千年的悲歌"
+                },
+                {
+                  "listTitle":"秦王统一，兵佣穿越千年的悲歌"
+                },
+                {
+                  "listTitle":"秦王统一，兵佣穿越千年的悲歌"
+                },
+                {
+                  "listTitle":"秦王统一，兵佣穿越千年的悲歌"
+                }
+              ]
+            },
+            
+          ]
         },
+        // 有声书
         {
-          "theme":{
           "name":'有声书',
           "data":[
             {
@@ -147,45 +271,731 @@ app.get('/shouye',(req,res) =>{
               "title": "audioBook",
               "bookName": "单田芳经典—乱世枭雄",
               "coverPath": "http://localhost:3000/content/6.png",
-              "content":"张作霖和张学良的传奇故事"
+              "content":"张作霖和张学良的传奇故事",
+              "contentList":[
+                {
+                  "listTitle":"张作霖和张学良的传奇故事"
+                },
+                {
+                  "listTitle":"张作霖和张学良的传奇故事"
+                },
+                {
+                  "listTitle":"张作霖和张学良的传奇故事"
+                },
+                {
+                  "listTitle":"张作霖和张学良的传奇故事"
+                },
+                {
+                  "listTitle":"张作霖和张学良的传奇故事"
+                },
+                {
+                  "listTitle":"张作霖和张学良的传奇故事"
+                },
+                {
+                  "listTitle":"张作霖和张学良的传奇故事"
+                },
+                {
+                  "listTitle":"张作霖和张学良的传奇故事"
+                },
+                {
+                  "listTitle":"张作霖和张学良的传奇故事"
+                }
+              ]
             },
             {
               "id": 2,
               "title": "audioBook",
               "bookName": "总有这样的歌只想一个人听",
               "coverPath": "http://localhost:3000/content/11.png",
-              "content":"治愈|播放量最高的怀旧好歌推荐"
+              "content":"治愈|播放量最高的怀旧好歌推荐",
+              "contentList":[
+                {
+                  "listTitle":"治愈|播放量最高的怀旧好歌推荐"
+                },
+                {
+                  "listTitle":"治愈|播放量最高的怀旧好歌推荐"
+                },
+                {
+                  "listTitle":"治愈|播放量最高的怀旧好歌推荐"
+                },
+                {
+                  "listTitle":"治愈|播放量最高的怀旧好歌推荐"
+                },
+                {
+                  "listTitle":"治愈|播放量最高的怀旧好歌推荐"
+                },
+                {
+                  "listTitle":"治愈|播放量最高的怀旧好歌推荐"
+                },
+                {
+                  "listTitle":"治愈|播放量最高的怀旧好歌推荐"
+                },
+                {
+                  "listTitle":"治愈|播放量最高的怀旧好歌推荐"
+                },
+                {
+                  "listTitle":"治愈|播放量最高的怀旧好歌推荐"
+                }
+              ]
             },
             {
               "id": 3,
               "title": "audioBook",
               "bookName": "糗事播报",
               "coverPath": "http://localhost:3000/content/8.png",
-              "content":"爆笑糗事互怼停不下来"
+              "content":"爆笑糗事互怼停不下来",
+              "contentList":[
+                {
+                  "listTitle":"爆笑糗事互怼停不下来"
+                },
+                {
+                  "listTitle":"爆笑糗事互怼停不下来"
+                },
+                {
+                  "listTitle":"爆笑糗事互怼停不下来"
+                },
+                {
+                  "listTitle":"爆笑糗事互怼停不下来"
+                },
+                {
+                  "listTitle":"爆笑糗事互怼停不下来"
+                },
+                {
+                  "listTitle":"爆笑糗事互怼停不下来"
+                },
+                {
+                  "listTitle":"爆笑糗事互怼停不下来"
+                },
+                {
+                  "listTitle":"爆笑糗事互怼停不下来"
+                },
+                {
+                  "listTitle":"爆笑糗事互怼停不下来"
+                },
+                {
+                  "listTitle":"爆笑糗事互怼停不下来"
+                }
+              ]
             },
             {
               "id": 4,
               "title": "audioBook",
               "bookName": "蕊希电台",
               "coverPath": "http://localhost:3000/content/7.png",
-              "content":"治愈情感|最暖心主播陪你入睡"
+              "content":"治愈情感|最暖心主播陪你入睡",
+              "contentList":[
+                {
+                  "listTitle":"治愈情感|最暖心主播陪你入睡"
+                },
+                {
+                  "listTitle":"治愈情感|最暖心主播陪你入睡"
+                },
+                {
+                  "listTitle":"治愈情感|最暖心主播陪你入睡"
+                },
+                {
+                  "listTitle":"治愈情感|最暖心主播陪你入睡"
+                },
+                {
+                  "listTitle":"治愈情感|最暖心主播陪你入睡"
+                },
+                {
+                  "listTitle":"治愈情感|最暖心主播陪你入睡"
+                },
+                {
+                  "listTitle":"治愈情感|最暖心主播陪你入睡"
+                },
+                {
+                  "listTitle":"治愈情感|最暖心主播陪你入睡"
+                },
+                {
+                  "listTitle":"治愈情感|最暖心主播陪你入睡"
+                },
+                {
+                  "listTitle":"治愈情感|最暖心主播陪你入睡"
+                }
+              ]
             },
             {
               "id": 5,
               "title": "audioBook",
               "bookName": "晓说2018",
               "coverPath": "http://localhost:3000/content/12.png",
-              "content":"世界依旧很大，大到可以晓说"
+              "content":"世界依旧很大，大到可以晓说",
+              "contentList":[
+                {
+                  "listTitle":"世界依旧很大，大到可以晓说"
+                },
+                {
+                  "listTitle":"世界依旧很大，大到可以晓说"
+                },
+                {
+                  "listTitle":"世界依旧很大，大到可以晓说"
+                },
+                {
+                  "listTitle":"世界依旧很大，大到可以晓说"
+                },
+                {
+                  "listTitle":"世界依旧很大，大到可以晓说"
+                },
+                {
+                  "listTitle":"世界依旧很大，大到可以晓说"
+                },
+                {
+                  "listTitle":"世界依旧很大，大到可以晓说"
+                },
+                {
+                  "listTitle":"世界依旧很大，大到可以晓说"
+                },
+                {
+                  "listTitle":"世界依旧很大，大到可以晓说"
+                }
+              ]
             },
             {
               "id": 6,
               "title": "audioBook",
               "bookName": "小沈龙脱口秀",
               "coverPath": "http://localhost:3000/content/13.png",
-              "content":"超文艺与众不同，头都笑歪了"
+              "content":"超文艺与众不同，头都笑歪了",
+              "contentList":[
+                {
+                  "listTitle":"超文艺与众不同，头都笑歪了"
+                },
+                {
+                  "listTitle":"超文艺与众不同，头都笑歪了"
+                },
+                {
+                  "listTitle":"超文艺与众不同，头都笑歪了"
+                },
+                {
+                  "listTitle":"超文艺与众不同，头都笑歪了"
+                },
+                {
+                  "listTitle":"超文艺与众不同，头都笑歪了"
+                },
+                {
+                  "listTitle":"超文艺与众不同，头都笑歪了"
+                },
+                {
+                  "listTitle":"超文艺与众不同，头都笑歪了"
+                },
+                {
+                  "listTitle":"超文艺与众不同，头都笑歪了"
+                },
+                {
+                  "listTitle":"超文艺与众不同，头都笑歪了"
+                },
+                {
+                  "listTitle":"超文艺与众不同，头都笑歪了"
+                }
+              ]
             },
           ]
-          }
+        },
+        // 相声
+        {
+          "name":'相声',
+          "data":[
+            {
+              "id": 1,
+              "title": "audioBook",
+              "bookName": "单田芳经典—乱世枭雄",
+              "coverPath": "http://localhost:3000/content/6.png",
+              "content":"张作霖和张学良的传奇故事",
+              "contentList":[
+                {
+                  "listTitle":"张作霖和张学良的传奇故事"
+                },
+                {
+                  "listTitle":"张作霖和张学良的传奇故事"
+                },
+                {
+                  "listTitle":"张作霖和张学良的传奇故事"
+                },
+                {
+                  "listTitle":"张作霖和张学良的传奇故事"
+                },
+                {
+                  "listTitle":"张作霖和张学良的传奇故事"
+                },
+                {
+                  "listTitle":"张作霖和张学良的传奇故事"
+                }
+              ]
+            },
+            {
+              "id": 2,
+              "title": "audioBook",
+              "bookName": "总有这样的歌只想一个人听",
+              "coverPath": "http://localhost:3000/content/11.png",
+              "content":"治愈|播放量最高的怀旧好歌推荐",
+              "contentList":[
+                {
+                  "listTitle":"治愈|播放量最高的怀旧好歌推荐"
+                },
+                {
+                  "listTitle":"治愈|播放量最高的怀旧好歌推荐"
+                },
+                {
+                  "listTitle":"治愈|播放量最高的怀旧好歌推荐"
+                },
+                {
+                  "listTitle":"治愈|播放量最高的怀旧好歌推荐"
+                },
+                {
+                  "listTitle":"治愈|播放量最高的怀旧好歌推荐"
+                },
+                {
+                  "listTitle":"治愈|播放量最高的怀旧好歌推荐"
+                }
+              ]
+            },
+            {
+              "id": 3,
+              "title": "audioBook",
+              "bookName": "糗事播报",
+              "coverPath": "http://localhost:3000/content/8.png",
+              "content":"爆笑糗事互怼停不下来",
+              "contentList":[
+                {
+                  "listTitle":"爆笑糗事互怼停不下来"
+                },
+                {
+                  "listTitle":"爆笑糗事互怼停不下来"
+                },
+                {
+                  "listTitle":"爆笑糗事互怼停不下来"
+                },
+                {
+                  "listTitle":"爆笑糗事互怼停不下来"
+                },
+                {
+                  "listTitle":"爆笑糗事互怼停不下来"
+                },
+                {
+                  "listTitle":"爆笑糗事互怼停不下来"
+                }
+              ]
+            },
+            {
+              "id": 4,
+              "title": "audioBook",
+              "bookName": "蕊希电台",
+              "coverPath": "http://localhost:3000/content/7.png",
+              "content":"治愈情感|最暖心主播陪你入睡",
+              "contentList":[
+                {
+                  "listTitle":"治愈情感|最暖心主播陪你入睡"
+                },
+                {
+                  "listTitle":"治愈情感|最暖心主播陪你入睡"
+                },
+                {
+                  "listTitle":"治愈情感|最暖心主播陪你入睡"
+                },
+                {
+                  "listTitle":"治愈情感|最暖心主播陪你入睡"
+                },
+                {
+                  "listTitle":"治愈情感|最暖心主播陪你入睡"
+                },
+                {
+                  "listTitle":"治愈情感|最暖心主播陪你入睡"
+                }
+              ]
+            },
+            {
+              "id": 5,
+              "title": "audioBook",
+              "bookName": "晓说2018",
+              "coverPath": "http://localhost:3000/content/12.png",
+              "content":"世界依旧很大，大到可以晓说",
+              "contentList":[
+                {
+                  "listTitle":"世界依旧很大，大到可以晓说"
+                },
+                {
+                  "listTitle":"世界依旧很大，大到可以晓说"
+                },
+                {
+                  "listTitle":"世界依旧很大，大到可以晓说"
+                },
+                {
+                  "listTitle":"世界依旧很大，大到可以晓说"
+                },
+                {
+                  "listTitle":"世界依旧很大，大到可以晓说"
+                },
+                {
+                  "listTitle":"世界依旧很大，大到可以晓说"
+                }
+              ]
+            },
+            {
+              "id": 6,
+              "title": "audioBook",
+              "bookName": "小沈龙脱口秀",
+              "coverPath": "http://localhost:3000/content/13.png",
+              "content":"超文艺与众不同，头都笑歪了",
+              "contentList":[
+                {
+                  "listTitle":"超文艺与众不同，头都笑歪了"
+                },
+                {
+                  "listTitle":"超文艺与众不同，头都笑歪了"
+                },
+                {
+                  "listTitle":"超文艺与众不同，头都笑歪了"
+                },
+                {
+                  "listTitle":"超文艺与众不同，头都笑歪了"
+                },
+                {
+                  "listTitle":"超文艺与众不同，头都笑歪了"
+                },
+                {
+                  "listTitle":"超文艺与众不同，头都笑歪了"
+                }
+              ]
+            },
+          ]
+        },
+        // 音乐
+        {
+          "name":'音乐',
+          "data":[
+            {
+              "id": 1,
+              "title": "audioBook",
+              "bookName": "单田芳经典—乱世枭雄",
+              "coverPath": "http://localhost:3000/content/6.png",
+              "content":"张作霖和张学良的传奇故事",
+              "contentList":[
+                {
+                  "listTitle":"张作霖和张学良的传奇故事"
+                },
+                {
+                  "listTitle":"张作霖和张学良的传奇故事"
+                },
+                {
+                  "listTitle":"张作霖和张学良的传奇故事"
+                },
+                {
+                  "listTitle":"张作霖和张学良的传奇故事"
+                },
+                {
+                  "listTitle":"张作霖和张学良的传奇故事"
+                },
+                {
+                  "listTitle":"张作霖和张学良的传奇故事"
+                }
+              ]
+            },
+            {
+              "id": 2,
+              "title": "audioBook",
+              "bookName": "总有这样的歌只想一个人听",
+              "coverPath": "http://localhost:3000/content/11.png",
+              "content":"治愈|播放量最高的怀旧好歌推荐",
+              "contentList":[
+                {
+                  "listTitle":"治愈|播放量最高的怀旧好歌推荐"
+                },
+                {
+                  "listTitle":"治愈|播放量最高的怀旧好歌推荐"
+                },
+                {
+                  "listTitle":"治愈|播放量最高的怀旧好歌推荐"
+                },
+                {
+                  "listTitle":"治愈|播放量最高的怀旧好歌推荐"
+                },
+                {
+                  "listTitle":"治愈|播放量最高的怀旧好歌推荐"
+                },
+                {
+                  "listTitle":"治愈|播放量最高的怀旧好歌推荐"
+                }
+              ]
+            },
+            {
+              "id": 3,
+              "title": "audioBook",
+              "bookName": "糗事播报",
+              "coverPath": "http://localhost:3000/content/8.png",
+              "content":"爆笑糗事互怼停不下来",
+              "contentList":[
+                {
+                  "listTitle":"爆笑糗事互怼停不下来"
+                },
+                {
+                  "listTitle":"爆笑糗事互怼停不下来"
+                },
+                {
+                  "listTitle":"爆笑糗事互怼停不下来"
+                },
+                {
+                  "listTitle":"爆笑糗事互怼停不下来"
+                },
+                {
+                  "listTitle":"爆笑糗事互怼停不下来"
+                },
+                {
+                  "listTitle":"爆笑糗事互怼停不下来"
+                }
+              ]
+            },
+            {
+              "id": 4,
+              "title": "audioBook",
+              "bookName": "蕊希电台",
+              "coverPath": "http://localhost:3000/content/7.png",
+              "content":"治愈情感|最暖心主播陪你入睡",
+              "contentList":[
+                {
+                  "listTitle":"治愈情感|最暖心主播陪你入睡"
+                },
+                {
+                  "listTitle":"治愈情感|最暖心主播陪你入睡"
+                },
+                {
+                  "listTitle":"治愈情感|最暖心主播陪你入睡"
+                },
+                {
+                  "listTitle":"治愈情感|最暖心主播陪你入睡"
+                },
+                {
+                  "listTitle":"治愈情感|最暖心主播陪你入睡"
+                },
+                {
+                  "listTitle":"治愈情感|最暖心主播陪你入睡"
+                }
+              ]
+            },
+            {
+              "id": 5,
+              "title": "audioBook",
+              "bookName": "晓说2018",
+              "coverPath": "http://localhost:3000/content/12.png",
+              "content":"世界依旧很大，大到可以晓说",
+              "contentList":[
+                {
+                  "listTitle":"世界依旧很大，大到可以晓说"
+                },
+                {
+                  "listTitle":"世界依旧很大，大到可以晓说"
+                },
+                {
+                  "listTitle":"世界依旧很大，大到可以晓说"
+                },
+                {
+                  "listTitle":"世界依旧很大，大到可以晓说"
+                },
+                {
+                  "listTitle":"世界依旧很大，大到可以晓说"
+                },
+                {
+                  "listTitle":"世界依旧很大，大到可以晓说"
+                }
+              ]
+            },
+            {
+              "id": 6,
+              "title": "audioBook",
+              "bookName": "小沈龙脱口秀",
+              "coverPath": "http://localhost:3000/content/13.png",
+              "content":"超文艺与众不同，头都笑歪了",
+              "contentList":[
+                {
+                  "listTitle":"超文艺与众不同，头都笑歪了"
+                },
+                {
+                  "listTitle":"超文艺与众不同，头都笑歪了"
+                },
+                {
+                  "listTitle":"超文艺与众不同，头都笑歪了"
+                },
+                {
+                  "listTitle":"超文艺与众不同，头都笑歪了"
+                },
+                {
+                  "listTitle":"超文艺与众不同，头都笑歪了"
+                },
+                {
+                  "listTitle":"超文艺与众不同，头都笑歪了"
+                }
+              ]
+            },
+          ]
+        },
+        // 儿童
+        {
+          "name":'有声书',
+          "data":[
+            {
+              "id": 1,
+              "title": "audioBook",
+              "bookName": "单田芳经典—乱世枭雄",
+              "coverPath": "http://localhost:3000/content/6.png",
+              "content":"张作霖和张学良的传奇故事",
+              "contentList":[
+                {
+                  "listTitle":"张作霖和张学良的传奇故事"
+                },
+                {
+                  "listTitle":"张作霖和张学良的传奇故事"
+                },
+                {
+                  "listTitle":"张作霖和张学良的传奇故事"
+                },
+                {
+                  "listTitle":"张作霖和张学良的传奇故事"
+                },
+                {
+                  "listTitle":"张作霖和张学良的传奇故事"
+                },
+                {
+                  "listTitle":"张作霖和张学良的传奇故事"
+                }
+              ]
+            },
+            {
+              "id": 2,
+              "title": "audioBook",
+              "bookName": "总有这样的歌只想一个人听",
+              "coverPath": "http://localhost:3000/content/11.png",
+              "content":"治愈|播放量最高的怀旧好歌推荐",
+              "contentList":[
+                {
+                  "listTitle":"治愈|播放量最高的怀旧好歌推荐"
+                },
+                {
+                  "listTitle":"治愈|播放量最高的怀旧好歌推荐"
+                },
+                {
+                  "listTitle":"治愈|播放量最高的怀旧好歌推荐"
+                },
+                {
+                  "listTitle":"治愈|播放量最高的怀旧好歌推荐"
+                },
+                {
+                  "listTitle":"治愈|播放量最高的怀旧好歌推荐"
+                },
+                {
+                  "listTitle":"治愈|播放量最高的怀旧好歌推荐"
+                }
+              ]
+            },
+            {
+              "id": 3,
+              "title": "audioBook",
+              "bookName": "糗事播报",
+              "coverPath": "http://localhost:3000/content/8.png",
+              "content":"爆笑糗事互怼停不下来",
+              "contentList":[
+                {
+                  "listTitle":"爆笑糗事互怼停不下来"
+                },
+                {
+                  "listTitle":"爆笑糗事互怼停不下来"
+                },
+                {
+                  "listTitle":"爆笑糗事互怼停不下来"
+                },
+                {
+                  "listTitle":"爆笑糗事互怼停不下来"
+                },
+                {
+                  "listTitle":"爆笑糗事互怼停不下来"
+                },
+                {
+                  "listTitle":"爆笑糗事互怼停不下来"
+                }
+              ]
+            },
+            {
+              "id": 4,
+              "title": "audioBook",
+              "bookName": "蕊希电台",
+              "coverPath": "http://localhost:3000/content/7.png",
+              "content":"治愈情感|最暖心主播陪你入睡",
+              "contentList":[
+                {
+                  "listTitle":"治愈情感|最暖心主播陪你入睡"
+                },
+                {
+                  "listTitle":"治愈情感|最暖心主播陪你入睡"
+                },
+                {
+                  "listTitle":"治愈情感|最暖心主播陪你入睡"
+                },
+                {
+                  "listTitle":"治愈情感|最暖心主播陪你入睡"
+                },
+                {
+                  "listTitle":"治愈情感|最暖心主播陪你入睡"
+                },
+                {
+                  "listTitle":"治愈情感|最暖心主播陪你入睡"
+                }
+              ]
+            },
+            {
+              "id": 5,
+              "title": "audioBook",
+              "bookName": "晓说2018",
+              "coverPath": "http://localhost:3000/content/12.png",
+              "content":"世界依旧很大，大到可以晓说",
+              "contentList":[
+                {
+                  "listTitle":"世界依旧很大，大到可以晓说"
+                },
+                {
+                  "listTitle":"世界依旧很大，大到可以晓说"
+                },
+                {
+                  "listTitle":"世界依旧很大，大到可以晓说"
+                },
+                {
+                  "listTitle":"世界依旧很大，大到可以晓说"
+                },
+                {
+                  "listTitle":"世界依旧很大，大到可以晓说"
+                },
+                {
+                  "listTitle":"世界依旧很大，大到可以晓说"
+                }
+              ]
+            },
+            {
+              "id": 6,
+              "title": "audioBook",
+              "bookName": "小沈龙脱口秀",
+              "coverPath": "http://localhost:3000/content/13.png",
+              "content":"超文艺与众不同，头都笑歪了",
+              "contentList":[
+                {
+                  "listTitle":"超文艺与众不同，头都笑歪了"
+                },
+                {
+                  "listTitle":"超文艺与众不同，头都笑歪了"
+                },
+                {
+                  "listTitle":"超文艺与众不同，头都笑歪了"
+                },
+                {
+                  "listTitle":"超文艺与众不同，头都笑歪了"
+                },
+                {
+                  "listTitle":"超文艺与众不同，头都笑歪了"
+                },
+                {
+                  "listTitle":"超文艺与众不同，头都笑歪了"
+                }
+              ]
+            },
+          ]
         }
       ]
     )
@@ -347,10 +1157,11 @@ setTimeout(() => {
 })
 
 // 分类数据
-app.get('/booksfenlei/',(req,res) =>{
+app.get('/books-type',(req,res) =>{
   setTimeout(() => {
     res.send([
       {
+        "name":"文学",
         "isAllPaid": false,
         "coverPath": "http://localhost:3000/booksfenlei/1.png",
         "title": "绝世高手",
@@ -379,16 +1190,17 @@ app.get('/booksfenlei/',(req,res) =>{
         ]
       },
       {
-      "isAllPaid": false,
-      "coverPath": "http://localhost:3000/booksfenlei/2.png",
-      "title": "极品天师",
-      "subtitle": "绅士天师，城市猎人，打怪泡妹",
-      "key": "1_163_ranking:album:playedEndUsers:30:0",
-      "firstId": 7,
-      "firstTitle": "鲜快报",
-      "calcPeriod": "月榜",
-      "top": 100,
-      "firstKResults": [
+        "name":"儿童",
+        "isAllPaid": false,
+        "coverPath": "http://localhost:3000/booksfenlei/2.png",
+        "title": "极品天师",
+        "subtitle": "绅士天师，城市猎人，打怪泡妹",
+        "key": "1_163_ranking:album:playedEndUsers:30:0",
+        "firstId": 7,
+        "firstTitle": "鲜快报",
+        "calcPeriod": "月榜",
+        "top": 100,
+        "firstKResults": [
           {
               "id": 7,
               "title": "鲜快报",
@@ -407,6 +1219,7 @@ app.get('/booksfenlei/',(req,res) =>{
       ]
       },
       {
+        "name":"音乐",
         "isAllPaid": false,
         "coverPath": "http://localhost:3000/booksfenlei/3.png",
         "title": "雪中悍刀行",
@@ -435,6 +1248,7 @@ app.get('/booksfenlei/',(req,res) =>{
         ]
       },
       {
+        "name":"历史",
         "isAllPaid": false,
         "coverPath": "http://localhost:3000/booksfenlei/4.png",
         "title": "异世邪君",
@@ -463,6 +1277,7 @@ app.get('/booksfenlei/',(req,res) =>{
         ]
       },
       {
+        "name":"有声",
         "isAllPaid": false,
         "coverPath": "http://localhost:3000/booksfenlei/5.png",
         "title": "恶魔之女",
@@ -491,6 +1306,7 @@ app.get('/booksfenlei/',(req,res) =>{
         ]
       },
       {
+        "name":"文学",
         "isAllPaid": false,
         "coverPath": "http://localhost:3000/booksfenlei/6.png",
         "title": "医女学武",
@@ -519,6 +1335,7 @@ app.get('/booksfenlei/',(req,res) =>{
         ]
       },
       {
+        "name":"儿童",
         "isAllPaid": false,
         "coverPath": "http://localhost:3000/booksfenlei/7.png",
         "title": "美人谋",
@@ -547,6 +1364,7 @@ app.get('/booksfenlei/',(req,res) =>{
         ]
       },
       {
+        "name":"音乐",
         "isAllPaid": false,
         "coverPath": "http://localhost:3000/booksfenlei/8.png",
         "title": "余生",
@@ -575,6 +1393,7 @@ app.get('/booksfenlei/',(req,res) =>{
         ]
       },
       {
+        "name":"历史",
         "isAllPaid": false,
         "coverPath": "http://localhost:3000/booksfenlei/9.png",
         "title": "故事里的玩家",
@@ -603,6 +1422,36 @@ app.get('/booksfenlei/',(req,res) =>{
         ]
       },
       {
+        "name":"有声",
+        "isAllPaid": false,
+        "coverPath": "http://localhost:3000/booksfenlei/10.png",
+        "title": "宫墙柳",
+        "subtitle": "知乎爆款，虐心之作",
+        "key": "1_163_ranking:album:playedEndUsers:30:0",
+        "firstId": 7,
+        "firstTitle": "鲜快报",
+        "calcPeriod": "月榜",
+        "top": 100,
+        "firstKResults": [
+          {
+            "id": 7,
+            "title": "鲜快报",
+            "contentType": "album"
+          },
+          {
+            "id": 8,
+            "title": "郭德纲21年相声精选",
+            "contentType": "album"
+          },
+          {
+            "id":9,
+            "title": "读者",
+            "contentType": "album"
+          }
+        ]
+      },
+      {
+        "name":"文学",
         "isAllPaid": false,
         "coverPath": "http://localhost:3000/booksfenlei/10.png",
         "title": "宫墙柳",
@@ -636,6 +1485,56 @@ app.get('/booksfenlei/',(req,res) =>{
     )
    }, 1000 + Math.random() * 2000);
   })
+
+  //用户密码登录
+app.post('/login_pwd',(req, res)=>{
+  const name = req.body.name
+  const pwd = req.body.pwd
+  if(name === 'admin' && pwd === 'admin'){
+    res.send({
+      code: 0,
+      data:{
+        name,
+        pwd,
+      }
+    })
+  }
+})
+
+//获取手机验证码
+app.get('/sendcode',(req, res)=>{
+  var phone = req.query.phone;
+  var code = sms_util.randomCode(6);
+  console.log(`向${phone}发送验证码短信: ${code}`);
+  sms_util.sendCode(phone, code, function (success) {//success表示是否成功
+    if (success) {
+      users[phone] = code
+      console.log('保存验证码: ', phone, code)
+      res.send({"code": 0})
+    } else {
+      //3. 返回响应数据
+      res.send({"code": 1, msg: '短信验证码发送失败'})
+    }
+  })
+})
+
+//手机验证码登录
+app.post('/login_sms',(req, res, next)=>{
+  var phone = req.body.phone;
+  var code = req.body.code;
+  if (users[phone] != code) {
+    res.send({code: 1, msg: '手机号或验证码不正确'});
+    return;
+  }else{
+    res.send({
+      code: 0,
+      data:{
+        phone
+      }
+    })
+  }
+
+})
 
 app.listen(3000, () => {
   console.log('服务器启动0')
