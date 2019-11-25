@@ -21,5 +21,33 @@ export const getNav = () => ajax({
 
 // 首页分信息
 export const getbookfenlei = () => ajax({
-  url: `/booksfenlei/`
+  url: `/books-type`
+})
+
+// 发送短信验证码
+export const sendCode = (phone) => ajax({
+  url:'/sendcode',
+  params:{
+    phone
+  }
+})
+
+/* 短信验证码登陆 */
+export const loginWithPhone = (phone,code) => ajax({
+  url:'/login_sms',
+  method:'POST',
+  data: {
+    phone,
+    code
+  },
+})
+
+// 用户名密码登陆
+export const loginWithPassword = (name,pwd) => ajax({
+  url:'/login_pwd',
+  method:'POST',
+  data: {
+    name,
+    pwd,
+  },
 })

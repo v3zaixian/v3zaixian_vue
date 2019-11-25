@@ -16,8 +16,9 @@
               <i class="iconfont icon-xiaomao"></i>
             </div>
             <div class="user-info">
-              <button class="user-info-top">立即登录</button>
-              <p>登录后，自动同步所有记录哦~</p>
+              <button class="user-info-top" v-if="!user.phone" @click="toLogin">{{user.name ? user.name : '立即登录'}}</button>
+              <p>{{user.phone ? user.phone : '暂无绑定手机号'}}</p>
+              <p v-if="!user">登录后，自动同步所有记录哦~</p>
             </div>
           </a>
         </section>
@@ -172,17 +173,28 @@
 
 <script type="text/ecmascript-6">
   import Vue from 'vue'
+  import {mapState} from 'vuex'
   import { Button ,MessageBox} from 'mint-ui'; 
   import BScroll from 'better-scroll'
+  import {LOGOUT} from '../../store/mutation-type'
   Vue.component(Button.name, Button);
 
   export default {
     methods: {
+
+      toLogin(){
+
+        if (this.user._id) {
+          return
+        }
+        this.$router.replace('/login')
+      },
       
       logout () {
         MessageBox.confirm('确定要退出登录吗?')
           .then(
             actionAgrre => this.$router.replace('/login'),
+            actionAgrre => {this.$store.commit(LOGOUT);this.$router.replace('/login')},
             actionReject => console.log('取消退出')
           )
       }
@@ -194,7 +206,13 @@
       new BScroll('.cantonter', {
         scrollY: true, // 设置纵向滑动
       })
+      this.$store.dispatch('autoLoginAction')
+    },
 
+    computed: {
+      ...mapState({
+        user: state => state.user
+      })
     },
   }
 </script>

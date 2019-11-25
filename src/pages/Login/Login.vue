@@ -96,6 +96,11 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import {
+    sendCode,
+    loginWithPassword,
+    loginWithPhone
+  } from '../../api'
   export default {
     data() {
       return {
@@ -112,8 +117,19 @@
     methods: {
 
       // 发送短信验证码
-      sendCode(){
+      async sendCode(){
         console.log('发送验证码')
+        console.log(this.phone)
+        let result = await sendCode(this.phone)
+        console.log(result)
+        if (result.code ===0) {
+          // 发送验证码成功
+          alert('验证码发送成功')
+        }else{
+          // console.log(result.code)
+          // 验证码发送失败
+          alert('验证码发送失败')
+        }
 
         this.countDown = 10
         this.intervalId = setInterval(() => {
@@ -124,20 +140,54 @@
 
 
       // 登录
-      login(){
+      async login(){
         // 跳转到个人中心页
-        this.$router.replace('/profile')
-      }
+        // this.$router.replace('/profile')
 
+        let {isPassWordLogin , username , pwd , phone , code} = this
+        let names = isPassWordLogin? ['username','pwd']:['phone','code']
+        // 对指定名称的进行前端验证
+        const success = await this.$validator.validateAll(names)
+        // 对表单进行统一的前端验证
+        if (success) {
+          alert('前端验证成功')
+          let result
+          if (isPassWordLogin) {
+            // 用户名密码登录成功
+            // console.log(name , pwd , captcha)
+            result = await loginWithPassword(username , pwd)
+            // console.log(result)
+            // 用户名密码登录失败
+            if (result.code === 1) {
+              alert('用户名或密码错误')
+            }
+          }else{
+            result = await loginWithPhone(phone , code)
+            if (result.code === 1) {
+              this.code = ''
+            }
+          }
+          // 登录成功
+          if (result.code === 0) {
+            alert('登录成功')
+            // 收集用户信息（用户名或手机号），并跳转页面
+            this.$store.dispatch('getUserAction',{user:result.data})
+            this.$router.replace('/profile')
+          }
+        }else{
+          alert('前端验证失败')
+        }
+      }
+      
     },
 
-    computed: {
-      isRightPhoneNumber(){
-        // 验证手机号是否满足要求
-        return /^1(3|4|5|6|7|8|9)\d{9}$/.test(this.phone)
-      }
+  computed: {
+    isRightPhoneNumber(){
+      // 验证手机号是否满足要求
+      return /^1(3|4|5|6|7|8|9)\d{9}$/.test(this.phone)
     }
   }
+}
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>

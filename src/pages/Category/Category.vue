@@ -79,12 +79,12 @@
           probeType: 2, // 实时
         })
         
-        this.rightScroll.on('scroll', ({x, y}) => {
+        this.rightScroll.on('scroll', ({ y}) => {
           this.scrollY = Math.abs(y)
           //  console.log(this.scrollY)
         })
 
-        this.rightScroll.on('scrollEnd', ({x, y}) => {
+        this.rightScroll.on('scrollEnd', ({ y}) => {
           this.scrollY = Math.abs(y)
          
         })
