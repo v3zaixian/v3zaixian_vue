@@ -22,7 +22,7 @@
           <p>
             没有收听过节目
           </p>
-          <button class="sxh_bto">去康康</button>
+          <button class="sxh_bto">去看看</button>
           </span>
         </div>
       </mt-tab-container-item>
